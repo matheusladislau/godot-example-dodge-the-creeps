@@ -1,0 +1,66 @@
+[gd_scene load_steps=10 format=3 uid="uid://bm36mfwfen38q"]
+
+[ext_resource type="Texture2D" uid="uid://cuexedg53os1r" path="res://art/enemyFlyingAlt_1.png" id="1_e3di3"]
+[ext_resource type="Script" path="res://scripts/mob.gd" id="1_iey3r"]
+[ext_resource type="Texture2D" uid="uid://b7vm6wh1esxce" path="res://art/enemyFlyingAlt_2.png" id="2_kh7g8"]
+[ext_resource type="Texture2D" uid="uid://bs6y2kw4gcmyc" path="res://art/enemySwimming_1.png" id="3_ewxqw"]
+[ext_resource type="Texture2D" uid="uid://87ue1dsifpny" path="res://art/enemySwimming_2.png" id="4_o5d7s"]
+[ext_resource type="Texture2D" uid="uid://brepgjsaxmtof" path="res://art/enemyWalking_1.png" id="5_rmorh"]
+[ext_resource type="Texture2D" uid="uid://chcvgq8cj4rg3" path="res://art/enemyWalking_2.png" id="6_ujnmv"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lwj2f"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_e3di3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_kh7g8")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_ewxqw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_o5d7s")
+}],
+"loop": true,
+"name": &"swim",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_rmorh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_ujnmv")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 3.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_j0gl1"]
+radius = 36.0
+height = 100.0
+
+[node name="mob" type="RigidBody2D" groups=["mobs"]]
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_iey3r")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.75, 0.75)
+sprite_frames = SubResource("SpriteFrames_lwj2f")
+animation = &"walk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_j0gl1")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
